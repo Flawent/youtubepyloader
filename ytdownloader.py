@@ -16,6 +16,7 @@ try:
     if only_audio == "y":
          audiostream.download(r"C:\Users\flawent\Downloads")
          print("Here your audio twin!! :P ")
+         input("Press Enter to exit...")
          sys.exit()
     elif only_audio == "n":
          print("k bro :)")
@@ -31,10 +32,17 @@ try:
     if audio_request == "y":
          audiostream.download(r"C:\Users\flawent\Downloads")
          print("Here you go twin!! >~< ")
+         input("Press Enter to exit...")
+         sys.exit()
     elif audio_request == "n":
-         print("k twin")
+         print("kk twin!")
+         input("Press Enter to exit...")
+         sys.exit()
     else:
          print("y or n, pls")
+         input("Press Enter to exit...")
+         sys.exit()
 
 except Exception as e:
       print(f"An error occurred. :( {e}")
+      input("Press Enter to exit...")
