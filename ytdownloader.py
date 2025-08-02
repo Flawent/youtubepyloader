@@ -29,8 +29,16 @@ try:
      only_audio = input("Download only audio? y/n: ")
      print("")
      if only_audio == "y":
-         audiostream.download(output_folder)
-         print("Here your audio twin!! :P ")
+         audiostream.download(output_folder, yt.title + ".mp4")
+         print("Decoding the audio for working in any program... ")
+         print("")
+         ffmpeg.output(
+          ffmpeg.input(finalaudio_path),
+          finalaudio_path,
+          acodec='aac',
+          strict='experimental'
+          ).run
+         print(f"Here your audio twin!! :P Saved as: {yt.title}.mp4")
          input("Press Enter to exit...")
          sys.exit()
      elif only_audio == "n":
@@ -38,6 +46,7 @@ try:
          
      print("Video title: " + yt.title)
      print("")
+
      #downloading video and audio stream to merge later
 
      #video
@@ -54,20 +63,20 @@ try:
 
      print("Merging now...")
      print("")
-     #actually don't really even sure how this shit works ▼▼▼?? chatgpt ahh programming 
      
+     #actually don't really even sure how this merging shit works ▼▼▼?? chatgpt ahh programming 
      ffmpeg.output(ffmpeg.input(video_path),
      ffmpeg.input(audio_path),
      finalvideo_path,
-     vcodec='copy',
+     vcodec='libx264',
      acodec='aac',
      strict='experimental'
      ).run(overwrite_output=True, quiet=True)
      
      print(f"Done! ♡⸜(˶˃ ᵕ ˂˶)⸝♡. Saved as: {yt.title}.mp4")
      print("")
-     #asking user if he wants to keep the audio
 
+     #asking user if he wants to keep the audio
      audio_request = input("Want to have audio separately too? y/n: ")
      if audio_request == "y":
           print(f"Here you go twin!! >~<. Saved as: {yt.title}.mp3")
@@ -89,8 +98,11 @@ try:
           os.remove(audio_path)
           sys.exit()     
 
+#exception handling!!
 except Exception as e:
      print(f"An error occurred. :( {e}")
-     os.remove(video_path)
-     os.remove(audio_path)
+     if os.path.exists(video_path):
+          os.remove(video_path)
+     if os.path.exists(audio_path):
+          os.remove(audio_path)
      input("Press Enter to exit...")
