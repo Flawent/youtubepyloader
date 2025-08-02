@@ -8,4 +8,6 @@ python (of course)
 
 pytubefix
 
+ffmpeg
+
 have fun, i guess
